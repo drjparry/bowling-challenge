@@ -58,9 +58,12 @@ BowlingGame.prototype._getScore = function() {
   };
 
   function isSpare(){
-    return score[scoreindex] + score[scoreindex]
+    return score[scoreindex] + score[scoreindex + 1] === 10;
+  };
 
-  }
+  function spareBonus(){
+    return score[scoreindex + 2];
+  };
 
    function SumOfRound() {
     return score[scoreindex] + score[scoreindex + 1];
@@ -72,6 +75,9 @@ BowlingGame.prototype._getScore = function() {
     if (isStrike()) {
       finalScore += 10 + strikeBonus();
       scoreindex++;
+    } else if (isSpare()) {
+      finalScore += 10 + spareBonus();
+      scoreindex += 2;
     } else {
       finalScore += SumOfRound();
       scoreindex += 2;
